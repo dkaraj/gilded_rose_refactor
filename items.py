@@ -1,9 +1,8 @@
 from enum import Enum
-
 import environ
 
 env = environ.Env()
-# reading .env file
+
 environ.Env.read_env()
 
 class Item:
@@ -15,12 +14,12 @@ class Item:
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
-
+import os
 class SpecialItems(Enum):
-    AGED_BRIE = env("AGED_BRIE")
-    BACKSTAGE_PASSES = env("BACKSTAGE_PASSES")
-    SULFURAS = env("SULFURAS")
-    CONJURED = env("CONJURED")
+    AGED_BRIE = os.getenv('AGED_BRIE')
+    BACKSTAGE_PASSES = os.getenv("BACKSTAGE_PASSES")
+    SULFURAS = os.getenv("SULFURAS")
+    CONJURED = os.getenv("CONJURED")
 
     def matches(self, item):
         return item.name.startswith(self.value)
